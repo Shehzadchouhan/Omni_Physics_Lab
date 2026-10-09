@@ -1,0 +1,10 @@
+/* Print stylesheet for university lab reports */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, aside, .print\:hidden {
+    display: none !important;
+  }
+}
