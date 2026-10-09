@@ -280,18 +280,23 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="relative isolate space-y-6">
+      <svg aria-hidden="true" className="pointer-events-none absolute right-2 top-1 z-10 h-24 w-24 text-violet-500 opacity-[0.08]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M18 22v56m6-56v56m6-56v56m6-56v56" />
+        <path d="M45 50c10-24 18-24 28 0s18 24 27 0M45 50c10 24 18 24 28 0s18-24 27 0" />
+        <path d="M79 20v60" strokeDasharray="3 5" />
+      </svg>
       {/* Top Banner */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 backdrop-blur-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-800 text-xs font-semibold mb-2">
             <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
             Wave Optics & Interference
           </div>
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             Laser Diffraction & Grating Bench
           </h2>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-slate-600 mt-1">
             Observe multi-order Fraunhofer diffraction spots and evaluate grating element <KatexMath math="d = n\lambda / \sin \theta" />.
           </p>
         </div>
@@ -302,13 +307,13 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
               setLinesPerMm(500);
               setLaserType('red');
             }}
-            className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Reset
           </button>
           <button
             onClick={handleTriggerReport}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-lg shadow-purple-950 flex items-center gap-1.5 transition-all"
+            className="px-4 py-2 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all"
           >
             <Sparkles className="w-3.5 h-3.5" /> Generate Lab Report
           </button>
@@ -316,16 +321,16 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
       </div>
 
       {/* 60fps Canvas Simulator */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
-        <div className="px-5 py-3 border-b border-slate-800 bg-slate-950/60 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-300">
-            <SunMedium className="w-3.5 h-3.5 text-purple-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+            <SunMedium className="w-3.5 h-3.5 text-purple-700" />
             Fraunhofer Diffraction Screen & Spectral Profile
           </div>
-          <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
-            <span className="text-purple-400">λ = {wavelengthNm} nm</span>
-            <span className="text-cyan-400">D = {screenDistanceD_cm} cm</span>
-            <span className="text-emerald-400">Grating = {linesPerMm} lines/mm</span>
+          <div className="flex items-center gap-4 text-xs font-mono text-slate-600">
+            <span className="text-purple-700">λ = {wavelengthNm} nm</span>
+            <span className="text-cyan-700">D = {screenDistanceD_cm} cm</span>
+            <span className="text-emerald-700">Grating = {linesPerMm} lines/mm</span>
           </div>
         </div>
 
@@ -340,14 +345,14 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
       {/* Control Knobs & Observation Table */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* Optical Bench Controls */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4">
-          <div className="flex items-center gap-2 text-sm font-semibold text-white">
-            <Sliders className="w-4 h-4 text-purple-400" />
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+          <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <Sliders className="w-4 h-4 text-purple-700" />
             Diffraction Bench Controls
           </div>
 
           <div>
-            <label className="text-xs text-slate-400 mb-1.5 block">Laser Source Wavelength</label>
+            <label className="text-xs text-slate-600 mb-1.5 block">Laser Source Wavelength</label>
             <div className="grid grid-cols-3 gap-2">
               {(['red', 'green', 'violet'] as const).map((type) => (
                 <button
@@ -355,8 +360,8 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
                   onClick={() => setLaserType(type)}
                   className={`py-2 px-3 rounded-xl text-xs font-medium capitalize border transition-all ${
                     laserType === type
-                      ? 'bg-purple-500/20 border-purple-500 text-white shadow-sm'
-                      : 'bg-slate-800/60 border-slate-700 text-slate-400 hover:text-slate-200'
+                      ? 'bg-purple-50 border-purple-300 text-purple-800 shadow-sm'
+                      : 'bg-slate-50 border-slate-300 text-slate-600 hover:text-slate-700'
                   }`}
                 >
                   {type}
@@ -366,7 +371,7 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
           </div>
 
           <div>
-            <label className="text-xs text-slate-400 mb-1.5 block">Grating Slit Density</label>
+            <label className="text-xs text-slate-600 mb-1.5 block">Grating Slit Density</label>
             <div className="space-y-1.5">
               {GRATING_PRESETS.map((p) => (
                 <button
@@ -374,8 +379,8 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
                   onClick={() => setLinesPerMm(p.linesPerMm)}
                   className={`w-full py-1.5 px-3 rounded-lg text-left text-xs border transition-all ${
                     linesPerMm === p.linesPerMm
-                      ? 'bg-purple-500/20 border-purple-500 text-white font-medium'
-                      : 'bg-slate-800/40 border-slate-800 text-slate-400 hover:text-slate-200'
+                      ? 'bg-purple-50 border-purple-300 text-purple-800 font-medium'
+                      : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-700'
                   }`}
                 >
                   {p.label}
@@ -385,9 +390,9 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Screen Distance (D)</span>
-              <span className="text-white font-mono">{screenDistanceD_cm} cm</span>
+              <span className="text-slate-900 font-mono">{screenDistanceD_cm} cm</span>
             </div>
             <input
               type="range"
@@ -402,10 +407,10 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
         </div>
 
         {/* Observation Table */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-3 md:col-span-2">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3 md:col-span-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm font-semibold text-white">
-              <Table className="w-4 h-4 text-purple-400" />
+            <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+              <Table className="w-4 h-4 text-purple-700" />
               Observation Table: Diffraction Orders & Angles
             </div>
           </div>
@@ -413,7 +418,7 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
           <div className="overflow-x-auto">
             <table className="w-full text-xs text-left">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400">
+                <tr className="border-b border-slate-200 text-slate-600">
                   <th className="py-2 px-3">Order (n)</th>
                   <th className="py-2 px-3">Displacement yn (cm)</th>
                   <th className="py-2 px-3">Angle θ (deg)</th>
@@ -421,14 +426,14 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
                   <th className="py-2 px-3">Grating d (µm)</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-mono">
+              <tbody className="divide-y divide-slate-200 font-mono">
                 {computedStats.rows.map((r) => (
-                  <tr key={r.order} className="hover:bg-slate-800/30">
-                    <td className="py-2 px-3 text-purple-400 font-bold">{r.order}</td>
-                    <td className="py-2 px-3 text-slate-200">{r.avgY_cm} cm</td>
-                    <td className="py-2 px-3 text-cyan-300">{r.thetaDeg}°</td>
-                    <td className="py-2 px-3 text-slate-400">{r.sinTheta}</td>
-                    <td className="py-2 px-3 text-emerald-400 font-bold">{r.d_um} µm</td>
+                  <tr key={r.order} className="hover:bg-slate-50">
+                    <td className="py-2 px-3 text-purple-700 font-bold">{r.order}</td>
+                    <td className="py-2 px-3 text-slate-700">{r.avgY_cm} cm</td>
+                    <td className="py-2 px-3 text-cyan-700">{r.thetaDeg}°</td>
+                    <td className="py-2 px-3 text-slate-600">{r.sinTheta}</td>
+                    <td className="py-2 px-3 text-emerald-700 font-bold">{r.d_um} µm</td>
                   </tr>
                 ))}
               </tbody>
@@ -437,58 +442,58 @@ export const Exp3Diffraction: React.FC<Exp3Props> = ({ onGenerateReport }) => {
 
           {/* Results Summary Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Mean Grating d</div>
-              <div className="text-base font-bold text-emerald-400 mt-1 font-mono">
-                {computedStats.meanD_um} <span className="text-xs text-slate-400">µm</span>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Mean Grating d</div>
+              <div className="text-base font-bold text-emerald-700 mt-1 font-mono">
+                {computedStats.meanD_um} <span className="text-xs text-slate-600">µm</span>
               </div>
-              <div className="text-[10px] text-slate-500">Slit Period</div>
+              <div className="text-[10px] text-slate-600">Slit Period</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Calculated N</div>
-              <div className="text-base font-bold text-cyan-400 mt-1 font-mono">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Calculated N</div>
+              <div className="text-base font-bold text-cyan-700 mt-1 font-mono">
                 {computedStats.linesPerCm}
               </div>
-              <div className="text-[10px] text-slate-500">lines / cm</div>
+              <div className="text-[10px] text-slate-600">lines / cm</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Target Standard</div>
-              <div className="text-base font-bold text-purple-400 mt-1 font-mono">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Target Standard</div>
+              <div className="text-base font-bold text-purple-700 mt-1 font-mono">
                 {(theoreticalD_meters * 1e6).toFixed(2)} µm
               </div>
-              <div className="text-[10px] text-slate-500">{linesPerMm} lines/mm</div>
+              <div className="text-[10px] text-slate-600">{linesPerMm} lines/mm</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Discrepancy Error</div>
-              <div className="text-base font-bold text-amber-400 mt-1 font-mono">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Discrepancy Error</div>
+              <div className="text-base font-bold text-amber-700 mt-1 font-mono">
                 {computedStats.errorPct}%
               </div>
-              <div className="text-[10px] text-emerald-400">✓ Accurate</div>
+              <div className="text-[10px] text-emerald-700">✓ Accurate</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Theory & Formulation */}
-      <div className="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-5">
-        <h3 className="text-sm font-semibold text-slate-300 flex items-center gap-2 mb-3">
-          <Info className="w-4 h-4 text-purple-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl p-5">
+        <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2 mb-3">
+          <Info className="w-4 h-4 text-purple-700" />
           Theory & Mathematical Formulation
         </h3>
-        <div className="text-xs text-slate-400 space-y-2 leading-relaxed">
+        <div className="text-xs text-slate-600 space-y-2 leading-relaxed">
           <p>
             When plane monochromatic light waves strike a periodic diffraction grating normally, the condition for constructive interference principal maxima of order <KatexMath math="n" /> is governed by the grating equation:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="d \sin \theta_n = n \lambda \implies d = (a + b) = \frac{n \lambda}{\sin \theta_n}" block />
           </div>
           <p>
             Measuring spot distance <KatexMath math="y_n" /> from the central zero-order spot on a screen placed at distance <KatexMath math="D" /> gives:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="\tan \theta_n = \frac{y_n}{D} \implies \theta_n = \arctan\left(\frac{y_n}{D}\right)" block />
           </div>
         </div>

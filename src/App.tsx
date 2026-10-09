@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
-import { PracticalIndexPage } from './components/index/PracticalIndexPage';
+import { WelcomePage } from './components/index/WelcomePage';
 import { Exp1Divergence } from './components/experiments/Exp1Divergence';
 import { Exp2Dielectric } from './components/experiments/Exp2Dielectric';
 import { Exp3Diffraction } from './components/experiments/Exp3Diffraction';
@@ -12,6 +12,7 @@ import { Exp7Hysteresis } from './components/experiments/Exp7Hysteresis';
 import { Exp8Ultrasonic } from './components/experiments/Exp8Ultrasonic';
 import { LabReportModal } from './components/report/LabReportModal';
 import { VivaTutorModal } from './components/viva/VivaTutorModal';
+import { ExperimentBackdrop } from './components/common/ExperimentBackdrop';
 import type { LabReportData } from './types/physics';
 import { ArrowLeft } from 'lucide-react';
 import './App.css';
@@ -27,22 +28,22 @@ export const App: React.FC = () => {
 
   const renderActiveView = () => {
     if (activeExperimentId === 'index') {
-      return <PracticalIndexPage onSelectExperiment={(id) => setActiveExperimentId(id)} />;
+      return <WelcomePage onSelectExperiment={setActiveExperimentId} />;
     }
 
     return (
       <div className="space-y-4">
         {/* Academic Breadcrumb to return to Index Page */}
-        <div className="flex items-center justify-between bg-slate-900/60 border border-slate-800/80 px-4 py-2.5 rounded-xl text-xs print:hidden">
+        <div className="flex items-center justify-between bg-white border border-slate-200 px-4 py-2.5 rounded-xl text-xs print:hidden">
           <button
             onClick={() => setActiveExperimentId('index')}
-            className="flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-semibold cursor-pointer transition-colors"
+            className="flex items-center gap-1.5 text-cyan-800 hover:text-cyan-950 font-semibold cursor-pointer transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Practical File Index</span>
           </button>
-          <div className="text-slate-400 font-mono text-[11px] hidden sm:block">
-            Journal Entry {activeExperimentId} of 8
+          <div className="text-slate-500 text-[11px] hidden sm:block">
+            Experiment {activeExperimentId} of 8
           </div>
         </div>
 
@@ -60,7 +61,10 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500/20 selection:text-cyan-300">
+    <div className="min-h-screen relative flex flex-col font-sans text-slate-900 selection:bg-cyan-200 selection:text-cyan-950">
+      {/* Dynamic Faded Background Schematics & Glow for Active Experiment */}
+      <ExperimentBackdrop activeExperimentId={activeExperimentId} />
+
       {/* Top Navbar */}
       <Navbar
         onOpenViva={() => setIsVivaModalOpen(true)}
@@ -69,13 +73,17 @@ export const App: React.FC = () => {
       />
 
       {/* Main Lab Layout */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className={`relative z-10 flex-1 w-full mx-auto px-4 sm:px-6 lg:px-8 ${
+        activeExperimentId === 'index' ? 'max-w-7xl py-8 sm:py-10' : 'max-w-[90rem] py-5 sm:py-7'
+      }`}>
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left Navigation Sidebar */}
-          <Sidebar
-            activeExperimentId={activeExperimentId}
-            onSelectExperiment={setActiveExperimentId}
-          />
+          {activeExperimentId !== 'index' && (
+            <Sidebar
+              activeExperimentId={activeExperimentId}
+              onSelectExperiment={setActiveExperimentId}
+            />
+          )}
 
           {/* Center Experiment Workbench or Index Page */}
           <div className="flex-1 min-w-0">

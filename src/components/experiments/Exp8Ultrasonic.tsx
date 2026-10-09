@@ -269,18 +269,23 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="relative isolate space-y-6">
+      <svg aria-hidden="true" className="pointer-events-none absolute right-2 top-1 z-10 h-24 w-24 text-cyan-500 opacity-[0.08]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 50h12m0 0c8-30 16-30 24 0s16 30 24 0 16-30 24 0" />
+        <path d="M24 24v52m48-52v52" strokeDasharray="3 5" />
+        <path d="M20 20h8m-8 60h8m40-60h8m-8 60h8" />
+      </svg>
       {/* Top Banner */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 backdrop-blur-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-800 text-xs font-semibold mb-2">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
             Acoustics & Ultrasonic Wave Physics
           </div>
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             Ultrasonic Interferometer Testing Bench
           </h2>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-slate-600 mt-1">
             Generate acoustic standing waves in liquids using piezoelectric resonance and evaluate speed <KatexMath math="v = f \lambda" /> and compressibility <KatexMath math="\beta_s = \frac{1}{\rho v^2}" />.
           </p>
         </div>
@@ -291,13 +296,13 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
               setLiquidIndex(0);
               setMicrometerPositionMm(7.49);
             }}
-            className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Reset
           </button>
           <button
             onClick={handleTriggerReport}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-semibold shadow-lg shadow-cyan-950 flex items-center gap-1.5 transition-all"
+            className="px-4 py-2 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all"
           >
             <Sparkles className="w-3.5 h-3.5" /> Generate Lab Report
           </button>
@@ -305,16 +310,16 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
       </div>
 
       {/* 60 FPS Canvas Simulator */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
-        <div className="px-5 py-3 border-b border-slate-800 bg-slate-950/60 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-300">
-            <Radio className="w-3.5 h-3.5 text-cyan-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+            <Radio className="w-3.5 h-3.5 text-cyan-700" />
             Acoustic Standing Wave Chamber & Microammeter (Live 60 FPS)
           </div>
-          <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
-            <span className="text-cyan-400">Liquid: {activeLiquid.name}</span>
-            <span className="text-emerald-400">f = {rfFrequencyMHz} MHz</span>
-            {calculationResults && <span className="text-amber-400">v = {calculationResults.velocityMs} m/s</span>}
+          <div className="flex items-center gap-4 text-xs font-mono text-slate-600">
+            <span className="text-cyan-700">Liquid: {activeLiquid.name}</span>
+            <span className="text-emerald-700">f = {rfFrequencyMHz} MHz</span>
+            {calculationResults && <span className="text-amber-700">v = {calculationResults.velocityMs} m/s</span>}
           </div>
         </div>
 
@@ -329,14 +334,14 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
       {/* Controls & Table */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* Controls */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4">
-          <div className="flex items-center gap-2 text-sm font-semibold text-white">
-            <Sliders className="w-4 h-4 text-cyan-400" />
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+          <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <Sliders className="w-4 h-4 text-cyan-700" />
             Liquid Medium & Transducer
           </div>
 
           <div>
-            <label className="text-xs text-slate-400 mb-1.5 block">Select Liquid Medium</label>
+            <label className="text-xs text-slate-600 mb-1.5 block">Select Liquid Medium</label>
             <div className="grid grid-cols-2 gap-2">
               {LIQUID_PRESETS.map((liq, idx) => (
                 <button
@@ -344,21 +349,21 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
                   onClick={() => setLiquidIndex(idx)}
                   className={`p-2 rounded-xl text-left border text-xs transition-all ${
                     liquidIndex === idx
-                      ? 'bg-cyan-500/20 border-cyan-500 text-white font-medium'
-                      : 'bg-slate-800/60 border-slate-700 text-slate-400 hover:text-slate-200'
+                      ? 'bg-cyan-50 border-cyan-300 text-cyan-800 font-medium'
+                      : 'bg-slate-50 border-slate-300 text-slate-600 hover:text-slate-700'
                   }`}
                 >
                   <div className="font-semibold">{liq.name}</div>
-                  <div className="text-[10px] text-slate-500">Ref: {liq.refVelocityMs} m/s</div>
+                  <div className="text-[10px] text-slate-600">Ref: {liq.refVelocityMs} m/s</div>
                 </button>
               ))}
             </div>
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Oscillator Frequency (f)</span>
-              <span className="text-white font-mono">{rfFrequencyMHz.toFixed(1)} MHz</span>
+              <span className="text-slate-900 font-mono">{rfFrequencyMHz.toFixed(1)} MHz</span>
             </div>
             <input
               type="range"
@@ -372,9 +377,9 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Micrometer Position</span>
-              <span className="text-white font-mono">{micrometerPositionMm.toFixed(2)} mm</span>
+              <span className="text-slate-900 font-mono">{micrometerPositionMm.toFixed(2)} mm</span>
             </div>
             <input
               type="range"
@@ -389,10 +394,10 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
         </div>
 
         {/* Observation Table */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-3 md:col-span-2">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3 md:col-span-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm font-semibold text-white">
-              <Table className="w-4 h-4 text-cyan-400" />
+            <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+              <Table className="w-4 h-4 text-cyan-700" />
               Observation Table: Anode Current Resonance Nodes (x1 to x11)
             </div>
           </div>
@@ -400,18 +405,18 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
           <div className="overflow-x-auto max-h-[140px]">
             <table className="w-full text-xs text-left">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400">
+                <tr className="border-b border-slate-200 text-slate-600">
                   <th className="py-1.5 px-3">Node #</th>
                   <th className="py-1.5 px-3">Micrometer Reading (mm)</th>
                   <th className="py-1.5 px-3">Interval Spacing</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-mono">
+              <tbody className="divide-y divide-slate-200 font-mono">
                 {readings.map((r, i) => (
-                  <tr key={r.nodeIndex} className="hover:bg-slate-800/30">
-                    <td className="py-1.5 px-3 text-cyan-400 font-bold">x{r.nodeIndex}</td>
-                    <td className="py-1.5 px-3 text-slate-200">{r.micrometerReadingMm} mm</td>
-                    <td className="py-1.5 px-3 text-slate-500">
+                  <tr key={r.nodeIndex} className="hover:bg-slate-50">
+                    <td className="py-1.5 px-3 text-cyan-700 font-bold">x{r.nodeIndex}</td>
+                    <td className="py-1.5 px-3 text-slate-700">{r.micrometerReadingMm} mm</td>
+                    <td className="py-1.5 px-3 text-slate-600">
                       {i === 0 ? '-' : `+${(r.micrometerReadingMm - readings[i - 1].micrometerReadingMm).toFixed(2)} mm`}
                     </td>
                   </tr>
@@ -423,36 +428,36 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
           {/* Results Metric Badges */}
           {calculationResults && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
-              <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-                <div className="text-[11px] text-slate-400">Wavelength (λ)</div>
-                <div className="text-base font-bold text-cyan-400 mt-1 font-mono">
-                  {calculationResults.wavelengthMm} <span className="text-xs text-slate-400">mm</span>
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <div className="text-[11px] text-slate-600">Wavelength (λ)</div>
+                <div className="text-base font-bold text-cyan-700 mt-1 font-mono">
+                  {calculationResults.wavelengthMm} <span className="text-xs text-slate-600">mm</span>
                 </div>
-                <div className="text-[10px] text-slate-500">2 × Loop Width</div>
+                <div className="text-[10px] text-slate-600">2 × Loop Width</div>
               </div>
 
-              <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-                <div className="text-[11px] text-slate-400">Sound Velocity (v)</div>
-                <div className="text-base font-bold text-emerald-400 mt-1 font-mono">
-                  {calculationResults.velocityMs} <span className="text-xs text-slate-400">m/s</span>
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <div className="text-[11px] text-slate-600">Sound Velocity (v)</div>
+                <div className="text-base font-bold text-emerald-700 mt-1 font-mono">
+                  {calculationResults.velocityMs} <span className="text-xs text-slate-600">m/s</span>
                 </div>
-                <div className="text-[10px] text-slate-500">Ref: {activeLiquid.refVelocityMs} m/s</div>
+                <div className="text-[10px] text-slate-600">Ref: {activeLiquid.refVelocityMs} m/s</div>
               </div>
 
-              <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-                <div className="text-[11px] text-slate-400">Compressibility (βs)</div>
-                <div className="text-sm font-bold text-purple-400 mt-1 font-mono truncate">
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <div className="text-[11px] text-slate-600">Compressibility (βs)</div>
+                <div className="text-sm font-bold text-purple-700 mt-1 font-mono truncate">
                   {calculationResults.adiabaticCompressibility.toExponential(2)}
                 </div>
-                <div className="text-[10px] text-slate-500">m²/N (Adiabatic)</div>
+                <div className="text-[10px] text-slate-600">m²/N (Adiabatic)</div>
               </div>
 
-              <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-                <div className="text-[11px] text-slate-400">Discrepancy Error</div>
-                <div className="text-base font-bold text-amber-400 mt-1 font-mono">
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <div className="text-[11px] text-slate-600">Discrepancy Error</div>
+                <div className="text-base font-bold text-amber-700 mt-1 font-mono">
                   {calculationResults.errorPct}%
                 </div>
-                <div className="text-[10px] text-emerald-400">✓ In Specification</div>
+                <div className="text-[10px] text-emerald-700">✓ In Specification</div>
               </div>
             </div>
           )}
@@ -460,22 +465,22 @@ export const Exp8Ultrasonic: React.FC<Exp8Props> = ({ onGenerateReport }) => {
       </div>
 
       {/* Theory & Formulation */}
-      <div className="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-5">
-        <h3 className="text-sm font-semibold text-slate-300 flex items-center gap-2 mb-3">
-          <Info className="w-4 h-4 text-cyan-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl p-5">
+        <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2 mb-3">
+          <Info className="w-4 h-4 text-cyan-700" />
           Theory & Mathematical Formulation
         </h3>
-        <div className="text-xs text-slate-400 space-y-2 leading-relaxed">
+        <div className="text-xs text-slate-600 space-y-2 leading-relaxed">
           <p>
             An acoustic standing wave is formed in the liquid medium when the distance between the quartz crystal and the metallic reflector is an integral multiple of half-wavelengths <KatexMath math="n \cdot \frac{\lambda}{2}" />. The loop width between 10 consecutive resonant nodes gives:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="l = \frac{x_{11} - x_1}{10} \implies \lambda = 2l \implies v = f \cdot \lambda = 2f \left(\frac{x_{11} - x_1}{10}\right)" block />
           </div>
           <p>
             The adiabatic compressibility <KatexMath math="\beta_s" /> of the liquid is evaluated using the Newton-Laplace formulation:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="\beta_s = \frac{1}{\rho v^2} \quad (\text{m}^2/\text{N} \text{ or } \text{Pa}^{-1})" block />
           </div>
         </div>

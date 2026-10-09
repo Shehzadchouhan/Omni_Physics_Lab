@@ -275,18 +275,23 @@ export const Exp7Hysteresis: React.FC<Exp7Props> = ({ onGenerateReport }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="relative isolate space-y-6">
+      <svg aria-hidden="true" className="pointer-events-none absolute right-2 top-1 z-10 h-24 w-24 text-emerald-500 opacity-[0.08]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M14 16v68h72" />
+        <path d="M20 50c0-27 13-34 29-25s11 37 27 38 12-32 5-39S61 20 59 49s8 35 18 26" />
+        <path d="M14 50h72M50 16v68" strokeDasharray="3 5" />
+      </svg>
       {/* Top Banner */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 backdrop-blur-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold mb-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             Magnetism & Oscilloscope Metrology
           </div>
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             Ferromagnetic Hysteresis Loop (CRO) Bench
           </h2>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-slate-600 mt-1">
             Trace dynamic <KatexMath math="B-H" /> loops on a virtual cathode ray oscilloscope and evaluate coercivity <KatexMath math="H_c" />, retentivity <KatexMath math="B_r" />, and energy dissipation.
           </p>
         </div>
@@ -298,13 +303,13 @@ export const Exp7Hysteresis: React.FC<Exp7Props> = ({ onGenerateReport }) => {
               setDriveCurrentAmps(2.5);
               setMaterialIndex(0);
             }}
-            className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Reset
           </button>
           <button
             onClick={handleTriggerReport}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-semibold shadow-lg shadow-emerald-950 flex items-center gap-1.5 transition-all"
+            className="px-4 py-2 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all"
           >
             <Sparkles className="w-3.5 h-3.5" /> Generate Lab Report
           </button>
@@ -312,16 +317,16 @@ export const Exp7Hysteresis: React.FC<Exp7Props> = ({ onGenerateReport }) => {
       </div>
 
       {/* 60 FPS CRO Display Canvas */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
-        <div className="px-5 py-3 border-b border-slate-800 bg-slate-950/60 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-300">
-            <Magnet className="w-3.5 h-3.5 text-emerald-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+            <Magnet className="w-3.5 h-3.5 text-emerald-700" />
             Dual-Trace CRT Oscilloscope Screen (X-Y Mode @ 60 FPS)
           </div>
-          <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
-            <span className="text-emerald-400">Core: {activeMat.name}</span>
-            <span className="text-cyan-400">Hc = {computedParams.Hc} A/m</span>
-            <span className="text-amber-400">Br = {computedParams.Br} T</span>
+          <div className="flex items-center gap-4 text-xs font-mono text-slate-600">
+            <span className="text-emerald-700">Core: {activeMat.name}</span>
+            <span className="text-cyan-700">Hc = {computedParams.Hc} A/m</span>
+            <span className="text-amber-700">Br = {computedParams.Br} T</span>
           </div>
         </div>
 
@@ -336,14 +341,14 @@ export const Exp7Hysteresis: React.FC<Exp7Props> = ({ onGenerateReport }) => {
       {/* Controls & Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* Specimen & CRO Controls */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4">
-          <div className="flex items-center gap-2 text-sm font-semibold text-white">
-            <Sliders className="w-4 h-4 text-emerald-400" />
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+          <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <Sliders className="w-4 h-4 text-emerald-700" />
             Core Material & CRO Knobs
           </div>
 
           <div>
-            <label className="text-xs text-slate-400 mb-1.5 block">Select Core Material</label>
+            <label className="text-xs text-slate-600 mb-1.5 block">Select Core Material</label>
             <div className="grid grid-cols-2 gap-2">
               {FERROMAGNETIC_MATERIALS.map((m, idx) => (
                 <button
@@ -351,12 +356,12 @@ export const Exp7Hysteresis: React.FC<Exp7Props> = ({ onGenerateReport }) => {
                   onClick={() => setMaterialIndex(idx)}
                   className={`p-2 rounded-xl text-left border text-xs transition-all ${
                     materialIndex === idx
-                      ? 'bg-emerald-500/20 border-emerald-500 text-white font-medium'
-                      : 'bg-slate-800/60 border-slate-700 text-slate-400 hover:text-slate-200'
+                      ? 'bg-emerald-50 border-emerald-300 text-emerald-800 font-medium'
+                      : 'bg-slate-50 border-slate-300 text-slate-600 hover:text-slate-700'
                   }`}
                 >
                   <div className="font-semibold">{m.name}</div>
-                  <div className="text-[10px] text-slate-500">{m.type === 'soft' ? 'Narrow Loop' : 'Wide Loop'}</div>
+                  <div className="text-[10px] text-slate-600">{m.type === 'soft' ? 'Narrow Loop' : 'Wide Loop'}</div>
                 </button>
               ))}
             </div>
@@ -364,9 +369,9 @@ export const Exp7Hysteresis: React.FC<Exp7Props> = ({ onGenerateReport }) => {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <div className="flex justify-between text-[11px] text-slate-400 mb-1">
+              <div className="flex justify-between text-[11px] text-slate-600 mb-1">
                 <span>X-Gain (gx)</span>
-                <span className="text-white font-mono">{croGainX.toFixed(1)}</span>
+                <span className="text-slate-900 font-mono">{croGainX.toFixed(1)}</span>
               </div>
               <input
                 type="range"
@@ -379,9 +384,9 @@ export const Exp7Hysteresis: React.FC<Exp7Props> = ({ onGenerateReport }) => {
               />
             </div>
             <div>
-              <div className="flex justify-between text-[11px] text-slate-400 mb-1">
+              <div className="flex justify-between text-[11px] text-slate-600 mb-1">
                 <span>Y-Gain (gy)</span>
-                <span className="text-white font-mono">{croGainY.toFixed(1)}</span>
+                <span className="text-slate-900 font-mono">{croGainY.toFixed(1)}</span>
               </div>
               <input
                 type="range"
@@ -396,9 +401,9 @@ export const Exp7Hysteresis: React.FC<Exp7Props> = ({ onGenerateReport }) => {
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Solenoid Drive Current (H-field)</span>
-              <span className="text-white font-mono">{driveCurrentAmps.toFixed(1)} A</span>
+              <span className="text-slate-900 font-mono">{driveCurrentAmps.toFixed(1)} A</span>
             </div>
             <input
               type="range"
@@ -413,137 +418,137 @@ export const Exp7Hysteresis: React.FC<Exp7Props> = ({ onGenerateReport }) => {
         </div>
 
         {/* Observation & Calculations */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-3 md:col-span-2">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3 md:col-span-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm font-semibold text-white">
-              <Table className="w-4 h-4 text-emerald-400" />
+            <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+              <Table className="w-4 h-4 text-emerald-700" />
               Metrology Parameters & Solenoid Telemetry
             </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <label className="text-[10px] text-slate-400 block mb-1">Sample Diam (mm)</label>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <label className="text-[10px] text-slate-600 block mb-1">Sample Diam (mm)</label>
               <input
                 type="number"
                 step={0.1}
                 value={sampleDiameterMm}
                 onChange={(e) => setSampleDiameterMm(Number(e.target.value))}
-                className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white font-mono"
+                className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900 font-mono"
               />
             </div>
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <label className="text-[10px] text-slate-400 block mb-1">Coil Diam (mm)</label>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <label className="text-[10px] text-slate-600 block mb-1">Coil Diam (mm)</label>
               <input
                 type="number"
                 step={0.1}
                 value={coilDiameterMm}
                 onChange={(e) => setCoilDiameterMm(Number(e.target.value))}
-                className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white font-mono"
+                className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900 font-mono"
               />
             </div>
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <label className="text-[10px] text-slate-400 block mb-1">Demag Factor (N)</label>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <label className="text-[10px] text-slate-600 block mb-1">Demag Factor (N)</label>
               <input
                 type="number"
                 step={0.001}
                 value={demagnetizationN}
                 onChange={(e) => setDemagnetizationN(Number(e.target.value))}
-                className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white font-mono"
+                className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900 font-mono"
               />
             </div>
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <label className="text-[10px] text-slate-400 block mb-1">Area Ratio As/Ac</label>
-              <div className="text-xs font-bold text-cyan-400 mt-2 font-mono">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <label className="text-[10px] text-slate-600 block mb-1">Area Ratio As/Ac</label>
+              <div className="text-xs font-bold text-cyan-700 mt-2 font-mono">
                 {areas.areaRatio.toFixed(3)}
               </div>
             </div>
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <label className="text-[10px] text-slate-400 block mb-1">Sample Length (mm)</label>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <label className="text-[10px] text-slate-600 block mb-1">Sample Length (mm)</label>
               <input
                 type="number"
                 step={1}
                 value={sampleLengthMm}
                 onChange={(e) => setSampleLengthMm(Number(e.target.value))}
-                className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white font-mono"
+                className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900 font-mono"
               />
             </div>
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <label className="text-[10px] text-slate-400 block mb-1">G0 Factor</label>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <label className="text-[10px] text-slate-600 block mb-1">G0 Factor</label>
               <input
                 type="number"
                 step={0.05}
                 value={g0Factor}
                 onChange={(e) => setG0Factor(Number(e.target.value))}
-                className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white font-mono"
+                className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900 font-mono"
               />
             </div>
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <label className="text-[10px] text-slate-400 block mb-1">U0 Factor</label>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <label className="text-[10px] text-slate-600 block mb-1">U0 Factor</label>
               <input
                 type="number"
                 step={0.05}
                 value={u0Factor}
                 onChange={(e) => setU0Factor(Number(e.target.value))}
-                className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white font-mono"
+                className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900 font-mono"
               />
             </div>
           </div>
 
           {/* Results Metric Badges */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3">
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Coercivity (Hc)</div>
-              <div className="text-base font-bold text-emerald-400 mt-1 font-mono">
-                {computedParams.Hc} <span className="text-xs text-slate-400">A/m</span>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Coercivity (Hc)</div>
+              <div className="text-base font-bold text-emerald-700 mt-1 font-mono">
+                {computedParams.Hc} <span className="text-xs text-slate-600">A/m</span>
               </div>
-              <div className="text-[10px] text-slate-500">Demagnetizing Force</div>
+              <div className="text-[10px] text-slate-600">Demagnetizing Force</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Retentivity (Br)</div>
-              <div className="text-base font-bold text-cyan-400 mt-1 font-mono">
-                {computedParams.Br} <span className="text-xs text-slate-400">Tesla</span>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Retentivity (Br)</div>
+              <div className="text-base font-bold text-cyan-700 mt-1 font-mono">
+                {computedParams.Br} <span className="text-xs text-slate-600">Tesla</span>
               </div>
-              <div className="text-[10px] text-slate-500">Remanence @ H=0</div>
+              <div className="text-[10px] text-slate-600">Remanence @ H=0</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Saturation (Ms)</div>
-              <div className="text-base font-bold text-amber-400 mt-1 font-mono">
-                {computedParams.Ms} <span className="text-xs text-slate-400">Tesla</span>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Saturation (Ms)</div>
+              <div className="text-base font-bold text-amber-700 mt-1 font-mono">
+                {computedParams.Ms} <span className="text-xs text-slate-600">Tesla</span>
               </div>
-              <div className="text-[10px] text-slate-500">Peak Magnetization</div>
+              <div className="text-[10px] text-slate-600">Peak Magnetization</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Loop Energy Loss</div>
-              <div className="text-base font-bold text-purple-400 mt-1 font-mono">
-                {computedParams.lossJm3} <span className="text-xs text-slate-400">J/m³</span>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Loop Energy Loss</div>
+              <div className="text-base font-bold text-purple-700 mt-1 font-mono">
+                {computedParams.lossJm3} <span className="text-xs text-slate-600">J/m³</span>
               </div>
-              <div className="text-[10px] text-slate-500">∮ H·dB per Cycle</div>
+              <div className="text-[10px] text-slate-600">∮ H·dB per Cycle</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Theory & Formulation */}
-      <div className="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-5">
-        <h3 className="text-sm font-semibold text-slate-300 flex items-center gap-2 mb-3">
-          <Info className="w-4 h-4 text-emerald-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl p-5">
+        <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2 mb-3">
+          <Info className="w-4 h-4 text-emerald-700" />
           Theory & Mathematical Formulation
         </h3>
-        <div className="text-xs text-slate-400 space-y-2 leading-relaxed">
+        <div className="text-xs text-slate-600 space-y-2 leading-relaxed">
           <p>
             When a ferromagnetic specimen is subjected to alternating magnetizing field in a solenoid, the magnetic flux density <KatexMath math="B" /> lags behind <KatexMath math="H" />. Connected to the CRO horizontal (X) and vertical (Y) channels, the loop displays:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="H_c = \frac{G_0 \cdot e_x}{\frac{A_s}{A_c} - N}, \quad B_r = \frac{G_0 \cdot U_0 \cdot g_x \cdot E_{yr}}{g_y \left(\frac{A_s}{A_c} - N\right) 4\pi}" block />
           </div>
           <p>
             The area of the hysteresis loop represents the thermal energy loss per unit volume of the specimen per magnetization cycle:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="W_{\text{loss}} = \oint H\,dB \quad (\text{J/m}^3\cdot\text{cycle})" block />
           </div>
         </div>

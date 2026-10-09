@@ -228,18 +228,23 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
   };
 
   return (
-    <div className="space-y-6">
+    <div className="relative isolate space-y-6">
+      <svg aria-hidden="true" className="pointer-events-none absolute right-2 top-1 z-10 h-24 w-24 text-rose-500 opacity-[0.08]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M10 42h48m-48 16h48" />
+        <path d="M58 42c12 0 18-12 32-25M58 50h35M58 58c12 0 18 12 32 25" />
+        <path d="M18 38v24m7-24v24m7-24v24" strokeDasharray="2 4" />
+      </svg>
       {/* Top Banner */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 backdrop-blur-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-800 text-xs font-semibold mb-2">
             <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
             Fiber Optics & Photon Transport
           </div>
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             Optical Fiber Numerical Aperture Bench
           </h2>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-slate-600 mt-1">
             Simulate Total Internal Reflection (TIR) and measure output beam cone to compute <KatexMath math="\text{NA} = \sin \theta_a = \sqrt{n_1^2 - n_2^2}" />.
           </p>
         </div>
@@ -250,13 +255,13 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
               setCladdingIndexN2(1.46);
               setScreenDistanceL_cm(2.5);
             }}
-            className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Reset
           </button>
           <button
             onClick={handleTriggerReport}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white text-xs font-semibold shadow-lg shadow-rose-950 flex items-center gap-1.5 transition-all"
+            className="px-4 py-2 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all"
           >
             <Sparkles className="w-3.5 h-3.5" /> Generate Lab Report
           </button>
@@ -264,16 +269,16 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
       </div>
 
       {/* 60 FPS Canvas Simulator */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
-        <div className="px-5 py-3 border-b border-slate-800 bg-slate-950/60 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-300">
-            <Cable className="w-3.5 h-3.5 text-rose-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+            <Cable className="w-3.5 h-3.5 text-rose-700" />
             Core/Cladding Ray Tracing & Acceptance Cone Projection (Live 60 FPS)
           </div>
-          <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
-            <span className="text-rose-400">NA = {theoreticalNA}</span>
-            <span className="text-amber-400">θa = {theoreticalThetaDeg}°</span>
-            <span className="text-cyan-400">Screen L = {screenDistanceL_cm} cm</span>
+          <div className="flex items-center gap-4 text-xs font-mono text-slate-600">
+            <span className="text-rose-700">NA = {theoreticalNA}</span>
+            <span className="text-amber-700">θa = {theoreticalThetaDeg}°</span>
+            <span className="text-cyan-700">Screen L = {screenDistanceL_cm} cm</span>
           </div>
         </div>
 
@@ -288,16 +293,16 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
       {/* Controls & Table */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* Controls */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4">
-          <div className="flex items-center gap-2 text-sm font-semibold text-white">
-            <Sliders className="w-4 h-4 text-rose-400" />
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+          <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <Sliders className="w-4 h-4 text-rose-700" />
             Fiber Indices & Screen Rail
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Core Refractive Index (n1)</span>
-              <span className="text-white font-mono">{coreIndexN1.toFixed(3)}</span>
+              <span className="text-slate-900 font-mono">{coreIndexN1.toFixed(3)}</span>
             </div>
             <input
               type="range"
@@ -311,9 +316,9 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Cladding Refractive Index (n2)</span>
-              <span className="text-white font-mono">{claddingIndexN2.toFixed(3)}</span>
+              <span className="text-slate-900 font-mono">{claddingIndexN2.toFixed(3)}</span>
             </div>
             <input
               type="range"
@@ -327,9 +332,9 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Screen Distance (L)</span>
-              <span className="text-white font-mono">{screenDistanceL_cm} cm</span>
+              <span className="text-slate-900 font-mono">{screenDistanceL_cm} cm</span>
             </div>
             <input
               type="range"
@@ -342,20 +347,20 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
             />
           </div>
 
-          <div className="p-3 bg-slate-950/70 border border-slate-800 rounded-xl">
-            <div className="text-[11px] text-slate-400">Current Output Spot Diameter (W)</div>
-            <div className="text-base font-bold text-rose-400 font-mono mt-1">
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <div className="text-[11px] text-slate-600">Current Output Spot Diameter (W)</div>
+            <div className="text-base font-bold text-rose-700 font-mono mt-1">
               {currentSpotDiameterCm} cm
             </div>
-            <div className="text-[10px] text-slate-500">At current screen distance</div>
+            <div className="text-[10px] text-slate-600">At current screen distance</div>
           </div>
         </div>
 
         {/* Observation Table */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-3 md:col-span-2">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3 md:col-span-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm font-semibold text-white">
-              <Table className="w-4 h-4 text-rose-400" />
+            <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+              <Table className="w-4 h-4 text-rose-700" />
               Observation Table: Spot Diameter vs. Screen Distance
             </div>
             <button
@@ -363,7 +368,7 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
                 const nextId = readings.length > 0 ? Math.max(...readings.map(r => r.id)) + 1 : 1;
                 setReadings([...readings, { id: nextId, screenDistanceL_cm, spotDiameterW_cm: currentSpotDiameterCm }]);
               }}
-              className="text-xs text-rose-400 hover:underline"
+              className="text-xs text-rose-700 hover:underline"
             >
               + Record Current
             </button>
@@ -372,7 +377,7 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
           <div className="overflow-x-auto">
             <table className="w-full text-xs text-left">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400">
+                <tr className="border-b border-slate-200 text-slate-600">
                   <th className="py-2 px-3">#</th>
                   <th className="py-2 px-3">Distance L (cm)</th>
                   <th className="py-2 px-3">Spot W (cm)</th>
@@ -380,14 +385,14 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
                   <th className="py-2 px-3">Computed NA</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-mono">
+              <tbody className="divide-y divide-slate-200 font-mono">
                 {experimentalStats.rows.map((r) => (
-                  <tr key={r.id} className="hover:bg-slate-800/30">
-                    <td className="py-2 px-3 text-slate-500">{r.id}</td>
-                    <td className="py-2 px-3 text-slate-200">{r.screenDistanceL_cm} cm</td>
-                    <td className="py-2 px-3 text-slate-200">{r.spotDiameterW_cm} cm</td>
-                    <td className="py-2 px-3 text-amber-300">{r.thetaDeg}°</td>
-                    <td className="py-2 px-3 text-rose-400 font-bold">{r.na}</td>
+                  <tr key={r.id} className="hover:bg-slate-50">
+                    <td className="py-2 px-3 text-slate-600">{r.id}</td>
+                    <td className="py-2 px-3 text-slate-700">{r.screenDistanceL_cm} cm</td>
+                    <td className="py-2 px-3 text-slate-700">{r.spotDiameterW_cm} cm</td>
+                    <td className="py-2 px-3 text-amber-700">{r.thetaDeg}°</td>
+                    <td className="py-2 px-3 text-rose-700 font-bold">{r.na}</td>
                   </tr>
                 ))}
               </tbody>
@@ -396,58 +401,58 @@ export const Exp5NumericalAperture: React.FC<Exp5Props> = ({ onGenerateReport })
 
           {/* Results Metric Badges */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Mean Measured NA</div>
-              <div className="text-base font-bold text-rose-400 mt-1 font-mono">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Mean Measured NA</div>
+              <div className="text-base font-bold text-rose-700 mt-1 font-mono">
                 {experimentalStats.avgNA}
               </div>
-              <div className="text-[10px] text-slate-500">From Screen Projection</div>
+              <div className="text-[10px] text-slate-600">From Screen Projection</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Theoretical NA</div>
-              <div className="text-base font-bold text-cyan-400 mt-1 font-mono">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Theoretical NA</div>
+              <div className="text-base font-bold text-cyan-700 mt-1 font-mono">
                 {theoreticalNA}
               </div>
-              <div className="text-[10px] text-slate-500">√(n1² - n2²)</div>
+              <div className="text-[10px] text-slate-600">√(n1² - n2²)</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Acceptance Angle</div>
-              <div className="text-base font-bold text-amber-400 mt-1 font-mono">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Acceptance Angle</div>
+              <div className="text-base font-bold text-amber-700 mt-1 font-mono">
                 {experimentalStats.avgThetaDeg}°
               </div>
-              <div className="text-[10px] text-slate-500">Half Cone Angle</div>
+              <div className="text-[10px] text-slate-600">Half Cone Angle</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Discrepancy Error</div>
-              <div className="text-base font-bold text-emerald-400 mt-1 font-mono">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Discrepancy Error</div>
+              <div className="text-base font-bold text-emerald-700 mt-1 font-mono">
                 {experimentalStats.errorPct}%
               </div>
-              <div className="text-[10px] text-emerald-400">✓ In Specification</div>
+              <div className="text-[10px] text-emerald-700">✓ In Specification</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Theory & Formulation */}
-      <div className="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-5">
-        <h3 className="text-sm font-semibold text-slate-300 flex items-center gap-2 mb-3">
-          <Info className="w-4 h-4 text-rose-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl p-5">
+        <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2 mb-3">
+          <Info className="w-4 h-4 text-rose-700" />
           Theory & Mathematical Formulation
         </h3>
-        <div className="text-xs text-slate-400 space-y-2 leading-relaxed">
+        <div className="text-xs text-slate-600 space-y-2 leading-relaxed">
           <p>
             The numerical aperture (<KatexMath math="\text{NA}" />) is a measure of the light gathering ability of the fiber. By Snell's law at the fiber entrance face and critical angle condition at the core-cladding boundary:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="\text{NA} = \sin \theta_a = \sqrt{n_1^2 - n_2^2}" block />
           </div>
           <p>
             When light emerging from the fiber forms a spot of diameter <KatexMath math="W" /> on a screen placed at perpendicular distance <KatexMath math="L" />, the acceptance angle is:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="\tan \theta_a = \frac{W/2}{L} \implies \text{NA} = \sin \theta_a = \frac{W/2}{\sqrt{(W/2)^2 + L^2}}" block />
           </div>
         </div>

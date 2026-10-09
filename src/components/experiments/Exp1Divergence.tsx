@@ -302,18 +302,23 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="relative isolate space-y-6">
+      <svg aria-hidden="true" className="pointer-events-none absolute right-2 top-1 z-10 h-24 w-24 text-red-500 opacity-[0.08]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M8 50h28m0 0 48-24M36 50l48 24" />
+        <circle cx="86" cy="26" r="5" /><circle cx="86" cy="74" r="5" />
+        <path d="M18 42v16m7-16v16m7-16v16" />
+      </svg>
       {/* Top Banner / Objective */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 backdrop-blur-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-800 text-xs font-semibold mb-2">
             <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
             Optics & Coherence
           </div>
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             Laser Beam Divergence Bench
           </h2>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-slate-600 mt-1">
             Measure spot diameter broadening over axial displacement and evaluate angular divergence <KatexMath math="\theta" />.
           </p>
         </div>
@@ -323,13 +328,13 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
               setDistanceD(100);
               setLaserType('red');
             }}
-            className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Reset
           </button>
           <button
             onClick={handleTriggerReport}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-semibold shadow-lg shadow-red-950 flex items-center gap-1.5 transition-all"
+            className="px-4 py-2 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all"
           >
             <Sparkles className="w-3.5 h-3.5" /> Generate Lab Report
           </button>
@@ -337,16 +342,16 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
       </div>
 
       {/* Interactive 60fps Canvas Simulator */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
-        <div className="px-5 py-3 border-b border-slate-800 bg-slate-950/60 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-300">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
             Virtual Optical Rail & Spot Detector (Live 60 FPS)
           </div>
-          <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
+          <div className="flex items-center gap-4 text-xs font-mono text-slate-600">
             <span>λ = {wavelengthNm} nm</span>
-            <span className="text-cyan-400">D = {distanceD} cm</span>
-            <span className="text-emerald-400">Spot = {currentSpotDiameterCm} cm</span>
+            <span className="text-cyan-700">D = {distanceD} cm</span>
+            <span className="text-emerald-700">Spot = {currentSpotDiameterCm} cm</span>
           </div>
         </div>
 
@@ -363,14 +368,14 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
       {/* Control Knobs & Parameter Adjustments */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* Optical Bench Controls */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4">
-          <div className="flex items-center gap-2 text-sm font-semibold text-white">
-            <Sliders className="w-4 h-4 text-red-400" />
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+          <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <Sliders className="w-4 h-4 text-red-700" />
             Bench & Wavelength Controls
           </div>
 
           <div>
-            <label className="text-xs text-slate-400 mb-1.5 block">Laser Source Wavelength</label>
+            <label className="text-xs text-slate-600 mb-1.5 block">Laser Source Wavelength</label>
             <div className="grid grid-cols-3 gap-2">
               {(['red', 'green', 'blue'] as const).map((type) => (
                 <button
@@ -378,8 +383,8 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
                   onClick={() => setLaserType(type)}
                   className={`py-2 px-3 rounded-xl text-xs font-medium capitalize border transition-all ${
                     laserType === type
-                      ? 'bg-red-500/20 border-red-500 text-white shadow-sm'
-                      : 'bg-slate-800/60 border-slate-700 text-slate-400 hover:text-slate-200'
+                      ? 'bg-red-50 border-red-300 text-red-800 shadow-sm'
+                      : 'bg-slate-50 border-slate-300 text-slate-600 hover:text-slate-700'
                   }`}
                 >
                   {type} ({type === 'red' ? '633nm' : type === 'green' ? '532nm' : '405nm'})
@@ -389,9 +394,9 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Axial Screen Distance (D)</span>
-              <span className="text-white font-mono">{distanceD} cm</span>
+              <span className="text-slate-900 font-mono">{distanceD} cm</span>
             </div>
             <input
               type="range"
@@ -405,9 +410,9 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Beam Divergence Coefficient</span>
-              <span className="text-white font-mono">{customDivergenceMrad} mrad</span>
+              <span className="text-slate-900 font-mono">{customDivergenceMrad} mrad</span>
             </div>
             <input
               type="range"
@@ -421,9 +426,9 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Initial Beam Waist (w0)</span>
-              <span className="text-white font-mono">{initialWaistW0} cm</span>
+              <span className="text-slate-900 font-mono">{initialWaistW0} cm</span>
             </div>
             <input
               type="range"
@@ -438,17 +443,17 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
 
           <button
             onClick={handleAddCurrentReading}
-            className="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold border border-cyan-500/20 flex items-center justify-center gap-1.5 transition-colors"
+            className="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-cyan-700 text-xs font-semibold border border-cyan-300/20 flex items-center justify-center gap-1.5 transition-colors"
           >
-            <Play className="w-3.5 h-3.5 text-cyan-400" /> Capture Current Reading into Table
+            <Play className="w-3.5 h-3.5 text-cyan-700" /> Capture Current Reading into Table
           </button>
         </div>
 
         {/* Observation Table */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-3 md:col-span-2">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3 md:col-span-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm font-semibold text-white">
-              <Table className="w-4 h-4 text-cyan-400" />
+            <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+              <Table className="w-4 h-4 text-cyan-700" />
               Observation Table: Spot Diameter vs. Distance
             </div>
             <button
@@ -456,7 +461,7 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
                 const nextId = readings.length > 0 ? Math.max(...readings.map(r => r.id)) + 1 : 1;
                 setReadings([...readings, { id: nextId, distanceD: 250, spotW: 0.58 }]);
               }}
-              className="text-xs text-cyan-400 hover:underline"
+              className="text-xs text-cyan-700 hover:underline"
             >
               + Add Row
             </button>
@@ -465,23 +470,23 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
           <div className="overflow-x-auto">
             <table className="w-full text-xs text-left">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400">
+                <tr className="border-b border-slate-200 text-slate-600">
                   <th className="py-2 px-3">#</th>
                   <th className="py-2 px-3">Distance D (cm)</th>
                   <th className="py-2 px-3">Spot Size w (cm)</th>
                   <th className="py-2 px-3">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-mono">
+              <tbody className="divide-y divide-slate-200 font-mono">
                 {readings.map((r) => (
-                  <tr key={r.id} className="hover:bg-slate-800/30">
-                    <td className="py-2 px-3 text-slate-500">{r.id}</td>
+                  <tr key={r.id} className="hover:bg-slate-50">
+                    <td className="py-2 px-3 text-slate-600">{r.id}</td>
                     <td className="py-2 px-3">
                       <input
                         type="number"
                         value={r.distanceD}
                         onChange={(e) => handleUpdateRow(r.id, 'distanceD', Number(e.target.value))}
-                        className="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-slate-200 w-24"
+                        className="bg-white border border-slate-300 rounded px-2 py-1 text-slate-700 w-24"
                       />
                     </td>
                     <td className="py-2 px-3">
@@ -490,13 +495,13 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
                         step={0.01}
                         value={r.spotW}
                         onChange={(e) => handleUpdateRow(r.id, 'spotW', Number(e.target.value))}
-                        className="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-slate-200 w-24"
+                        className="bg-white border border-slate-300 rounded px-2 py-1 text-slate-700 w-24"
                       />
                     </td>
                     <td className="py-2 px-3">
                       <button
                         onClick={() => handleDeleteRow(r.id)}
-                        className="text-rose-400 hover:text-rose-300 text-xs"
+                        className="text-rose-700 hover:text-rose-700 text-xs"
                       >
                         Delete
                       </button>
@@ -509,29 +514,29 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
 
           {/* Results Summary Cards */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pt-2">
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Calculated Divergence (θ)</div>
-              <div className="text-base font-bold text-emerald-400 mt-1">
-                {calculatedDivergence.thetaMrad} <span className="text-xs text-slate-400">mrad</span>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Calculated Divergence (θ)</div>
+              <div className="text-base font-bold text-emerald-700 mt-1">
+                {calculatedDivergence.thetaMrad} <span className="text-xs text-slate-600">mrad</span>
               </div>
-              <div className="text-[10px] text-slate-500 font-mono">{calculatedDivergence.thetaDeg}°</div>
+              <div className="text-[10px] text-slate-600 font-mono">{calculatedDivergence.thetaDeg}°</div>
             </div>
 
-            <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-              <div className="text-[11px] text-slate-400">Standard Laser Range</div>
-              <div className="text-base font-bold text-cyan-400 mt-1">
-                1.0 – 3.5 <span className="text-xs text-slate-400">mrad</span>
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div className="text-[11px] text-slate-600">Standard Laser Range</div>
+              <div className="text-base font-bold text-cyan-700 mt-1">
+                1.0 – 3.5 <span className="text-xs text-slate-600">mrad</span>
               </div>
-              <div className="text-[10px] text-emerald-400">✓ Within Typical Diode Range</div>
+              <div className="text-[10px] text-emerald-700">✓ Within Typical Diode Range</div>
             </div>
 
             {originalCppResult !== null && (
-              <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-                <div className="text-[11px] text-slate-400">Legacy C++ Result</div>
-                <div className="text-base font-bold text-purple-400 mt-1 font-mono">
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <div className="text-[11px] text-slate-600">Legacy C++ Result</div>
+                <div className="text-base font-bold text-purple-700 mt-1 font-mono">
                   {originalCppResult}
                 </div>
-                <div className="text-[10px] text-slate-500">From 1st-Year Formula</div>
+                <div className="text-[10px] text-slate-600">From 1st-Year Formula</div>
               </div>
             )}
           </div>
@@ -539,22 +544,22 @@ export const Exp1Divergence: React.FC<Exp1Props> = ({ onGenerateReport }) => {
       </div>
 
       {/* Theory & KaTeX Mathematical Derivations */}
-      <div className="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-5">
-        <h3 className="text-sm font-semibold text-slate-300 flex items-center gap-2 mb-3">
-          <Info className="w-4 h-4 text-cyan-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl p-5">
+        <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2 mb-3">
+          <Info className="w-4 h-4 text-cyan-700" />
           Theoretical Foundation & Mathematical Formulation
         </h3>
-        <div className="text-xs text-slate-400 space-y-2 leading-relaxed">
+        <div className="text-xs text-slate-600 space-y-2 leading-relaxed">
           <p>
             The divergence angle <KatexMath math="\theta" /> of a laser beam describes the far-field angular rate of spread. For a Gaussian laser mode <KatexMath math="\text{TEM}_{00}" />, the beam waist radius <KatexMath math="w(z)" /> at distance <KatexMath math="z" /> is governed by:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="w(z) = w_0 \sqrt{1 + \left(\frac{z}{z_R}\right)^2} \quad \text{where} \quad z_R = \frac{\pi w_0^2}{\lambda}" block />
           </div>
           <p>
             In practical laboratory experimental setups, spot diameters <KatexMath math="w_1" /> and <KatexMath math="w_2" /> measured on a millimeter grid screen separated by axial distance <KatexMath math="\Delta D = D_2 - D_1" /> yield:
           </p>
-          <div className="p-3 bg-slate-950/80 rounded-xl my-2 border border-slate-800/80 text-center">
+          <div className="p-3 bg-slate-50 rounded-xl my-2 border border-slate-200 text-center">
             <KatexMath math="\theta = \frac{w_2 - w_1}{2(D_2 - D_1)} \quad \text{or} \quad \theta_{\text{full}} = \frac{w_2 - w_1}{D_2 - D_1}" block />
           </div>
         </div>

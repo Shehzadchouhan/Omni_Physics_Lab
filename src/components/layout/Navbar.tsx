@@ -9,7 +9,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenViva, onNavigateIndex, isIndexActive }) => {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-800 bg-slate-950/80 backdrop-blur-md print:hidden">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/90 backdrop-blur-md print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand & Logo (Clickable to return to Index) */}
         <button
@@ -21,48 +21,43 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenViva, onNavigateIndex, isI
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-base tracking-tight text-white group-hover:text-cyan-300 transition-colors">
+              <span className="font-extrabold text-base tracking-tight text-slate-900 group-hover:text-cyan-800 transition-colors">
                 OmniLab
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-[10px] font-bold">
-                STUDIO v2.5
-              </span>
             </div>
-            <p className="text-[11px] text-slate-400 hidden sm:block">
-              Applied Physics Scientific Simulation & Metrology Engine
+            <p className="text-[11px] hidden sm:block text-slate-500">
+              Physics practicals, made easier to explore
             </p>
           </div>
         </button>
 
         {/* Action Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <button
-            onClick={onNavigateIndex}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all border ${
-              isIndexActive
-                ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40 shadow-sm'
-                : 'bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-700'
-            }`}
-          >
-            <FileCheck className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="hidden sm:inline">Practical File Index</span>
-          </button>
+          {!isIndexActive && (
+            <button
+              onClick={onNavigateIndex}
+              className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-all border border-slate-200"
+            >
+              <FileCheck className="w-3.5 h-3.5 text-cyan-700" />
+              <span className="hidden sm:inline">Home</span>
+            </button>
+          )}
 
           <button
             onClick={onOpenViva}
-            className="px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/20 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+            className="px-3 py-1.5 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-800 border border-violet-200 text-xs font-semibold flex items-center gap-1.5 transition-colors"
           >
-            <BookOpen className="w-3.5 h-3.5 text-purple-400" />
-            <span>Viva Tutor & Q&A</span>
+            <BookOpen className="w-3.5 h-3.5 text-violet-700" />
+            <span className="hidden sm:inline">Viva Tutor & Q&A</span>
           </button>
 
           <a
             href="https://github.com/Shehzadchouhan/Physics-Practical-File"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition-colors border border-slate-700"
+            className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-colors"
           >
-            <GitBranch className="w-3.5 h-3.5 text-slate-400" />
+            <GitBranch className="w-3.5 h-3.5 text-slate-500" />
             <span className="hidden md:inline">GitHub</span>
           </a>
         </div>
