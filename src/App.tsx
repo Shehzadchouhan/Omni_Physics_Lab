@@ -13,14 +13,33 @@ import { Exp8Ultrasonic } from './components/experiments/Exp8Ultrasonic';
 import { LabReportModal } from './components/report/LabReportModal';
 import { VivaTutorModal } from './components/viva/VivaTutorModal';
 import { ExperimentBackdrop } from './components/common/ExperimentBackdrop';
+import { PracticalGuide } from './components/common/PracticalGuide';
 import type { LabReportData } from './types/physics';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, BookOpen } from 'lucide-react';
 import './App.css';
 
 export const App: React.FC = () => {
   const [activeExperimentId, setActiveExperimentId] = useState<number | 'index'>('index');
   const [reportData, setReportData] = useState<LabReportData | null>(null);
   const [isVivaModalOpen, setIsVivaModalOpen] = useState<boolean>(false);
+  const [seenGuideIds, setSeenGuideIds] = useState<Set<number>>(() => new Set());
+  const [isPracticalGuideOpen, setIsPracticalGuideOpen] = useState<boolean>(false);
+
+  const handleSelectExperiment = (id: number | 'index') => {
+    setActiveExperimentId(id);
+    if (id === 'index') {
+      setIsPracticalGuideOpen(false);
+      return;
+    }
+
+    if (!seenGuideIds.has(id)) {
+      setSeenGuideIds((previous) => new Set(previous).add(id));
+      setIsPracticalGuideOpen(true);
+      return;
+    }
+
+    setIsPracticalGuideOpen(false);
+  };
 
   const handleGenerateReport = (data: LabReportData) => {
     setReportData(data);
@@ -28,7 +47,7 @@ export const App: React.FC = () => {
 
   const renderActiveView = () => {
     if (activeExperimentId === 'index') {
-      return <WelcomePage onSelectExperiment={setActiveExperimentId} />;
+      return <WelcomePage onSelectExperiment={handleSelectExperiment} />;
     }
 
     return (
@@ -36,14 +55,25 @@ export const App: React.FC = () => {
         {/* Academic Breadcrumb to return to Index Page */}
         <div className="flex items-center justify-between bg-white border border-slate-200 px-4 py-2.5 rounded-xl text-xs print:hidden">
           <button
-            onClick={() => setActiveExperimentId('index')}
+            onClick={() => handleSelectExperiment('index')}
             className="flex items-center gap-1.5 text-cyan-800 hover:text-cyan-950 font-semibold cursor-pointer transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Practical File Index</span>
           </button>
-          <div className="text-slate-500 text-[11px] hidden sm:block">
-            Experiment {activeExperimentId} of 8
+          <div className="flex items-center gap-3">
+            <span className="text-slate-500 text-[11px] hidden sm:block">
+              Experiment {activeExperimentId} of 8
+            </span>
+            <button
+              type="button"
+              onClick={() => setIsPracticalGuideOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-800 bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
+              aria-label="Open practical instructions and precautions"
+            >
+              <BookOpen className="h-3.5 w-3.5 text-cyan-300" aria-hidden="true" />
+              <span>Practical guide</span>
+            </button>
           </div>
         </div>
 
@@ -68,7 +98,7 @@ export const App: React.FC = () => {
       {/* Top Navbar */}
       <Navbar
         onOpenViva={() => setIsVivaModalOpen(true)}
-        onNavigateIndex={() => setActiveExperimentId('index')}
+        onNavigateIndex={() => handleSelectExperiment('index')}
         isIndexActive={activeExperimentId === 'index'}
       />
 
@@ -81,7 +111,7 @@ export const App: React.FC = () => {
           {activeExperimentId !== 'index' && (
             <Sidebar
               activeExperimentId={activeExperimentId}
-              onSelectExperiment={setActiveExperimentId}
+              onSelectExperiment={handleSelectExperiment}
             />
           )}
 
@@ -103,6 +133,13 @@ export const App: React.FC = () => {
         <VivaTutorModal
           activeExperimentId={typeof activeExperimentId === 'number' ? activeExperimentId : 1}
           onClose={() => setIsVivaModalOpen(false)}
+        />
+      )}
+
+      {isPracticalGuideOpen && typeof activeExperimentId === 'number' && (
+        <PracticalGuide
+          experimentId={activeExperimentId}
+          onClose={() => setIsPracticalGuideOpen(false)}
         />
       )}
     </div>
