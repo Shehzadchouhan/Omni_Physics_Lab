@@ -1,10 +1,10 @@
 import React from 'react';
 import { EXPERIMENTS } from '../../lib/constants';
-import { Zap, Layers, SunMedium, Atom, Cable, Activity, Magnet, Radio, Sparkles } from 'lucide-react';
+import { Zap, Layers, SunMedium, Atom, Cable, Activity, Magnet, Radio, Sparkles, FileCheck } from 'lucide-react';
 
 interface SidebarProps {
-  activeExperimentId: number;
-  onSelectExperiment: (id: number) => void;
+  activeExperimentId: number | 'index';
+  onSelectExperiment: (id: number | 'index') => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeExperimentId, onSelectExperiment }) => {
@@ -25,9 +25,34 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeExperimentId, onSelectEx
   const categories = ['Optics', 'Electromagnetism', 'Quantum', 'Acoustics'] as const;
 
   return (
-    <aside className="w-full lg:w-72 shrink-0 space-y-5">
+    <aside className="w-full lg:w-72 shrink-0 space-y-5 print:hidden">
       <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 backdrop-blur-sm">
-        <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 px-2 flex items-center justify-between">
+        {/* Index Page Navigation Item */}
+        <div className="mb-3">
+          <button
+            onClick={() => onSelectExperiment('index')}
+            className={`w-full p-2.5 rounded-xl text-left flex items-center gap-3 transition-all ${
+              activeExperimentId === 'index'
+                ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/10 border border-cyan-500/40 text-white font-medium shadow-md shadow-cyan-950/40'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800/60 border border-slate-800/80 bg-slate-950/40'
+            }`}
+          >
+            <div className={`p-1.5 rounded-lg shrink-0 ${
+              activeExperimentId === 'index' ? 'bg-cyan-500 text-slate-950' : 'bg-slate-800 text-cyan-400'
+            }`}>
+              <FileCheck className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                Practical File Index
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+              </div>
+              <div className="text-[10px] text-slate-400">Journal & Evaluation Record</div>
+            </div>
+          </button>
+        </div>
+
+        <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 px-2 flex items-center justify-between border-t border-slate-800/60 pt-3">
           <span>Experiment Workbenches</span>
           <span className="text-[10px] font-mono bg-slate-800 px-2 py-0.5 rounded-full text-cyan-400">
             8 LABS
