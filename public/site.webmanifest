@@ -1,0 +1,29 @@
+{
+  "name": "OmniLab — Virtual Physics Lab",
+  "short_name": "OmniLab",
+  "description": "Interactive virtual physics laboratory and scientific simulations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0891b2",
+  "icons": [
+    {
+      "src": "/omnilab-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/omnilab-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
